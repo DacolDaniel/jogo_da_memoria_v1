@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>Jogo da memória</title>
+        <meta charset="utf-8">
+        <link href="./css/main.css" rel="stylesheet"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <body>
+        <div id="app">
+            <div class="contagem-inicio" v-if="contagemShow">
+                    <span v-if="contagemValue < 4">{{contagemValue}}</span>
+                    <span v-if="contagemValue == 4">Começar</span>
+            </div>
+            <div class="menu" v-if="option=='menu'">
+               <ul>
+                   <li @click="menuOption('game')">
+                       <a>Jogar</a>
+                    </li>
+                   <li @click="menuOption('records')">Records</li>
+               </ul>
+            </div>
+            <div class="board" v-if="option=='game'">
+            <card 
+                 v-for="(card,key) of cards" 
+                 :index="key"
+                 :nome="!card.mostrar && !card.encontrado ? 'Encontre o Herói!' : card.nome"
+                 :imagem="!card.mostrar && !card.encontrado ? cardOculto  : card.imagem"
+                 @acao="mostrarCard(key)"
+            ></card>
+            <span class="tempo">Tempo: {{resultado.tempo}} - Erros {{resultado.erro}}</span>
+            <a class="btn-menu-game" @click="toogleMenuGame"><img  src="./imagem/menu.png"/></a>
+            <ul class="menu-game" v-if="menuGameShow">
+                <li  @click="menuOption('menu')">
+                    <a>Menu</a>
+                 </li>
+                <li @click="menuOption('game')">
+                    <a>Recomeçar</a>
+                 </li>
+                <li @click="menuOption('records')">Records</li>
+            </ul>
+
+            </div>
+            <div class="records"  v-if="option=='records'">
+                <a class="btn-menu-game" @click="toogleMenuGame"><img  src="./imagem/menu.png"/></a>
+                <ul class="menu-game" v-if="menuGameShow">
+                    <li  @click="menuOption('menu')">
+                        <a>Menu</a>
+                    </li>
+                    <li @click="menuOption('game')">
+                        <a>Recomeçar</a>
+                    </li>
+                    <li @click="menuOption('records')">Records</li>
+                </ul>
+                   <div class="records-resultado">
+                       <table>
+                           <tr>
+                               <th>Tempo</th>
+                               <th>Erro</th>
+                           </tr>
+                           <tr v-for="res in records">
+                               <td>{{res.tempo}}</td>
+                               <td>{{res.erro}}</td>
+                           </tr>
+                       </table>
+                   </div>
+            </div>
+        </div>
+     
+        <script src="./js/vue.js"></script> 
+        <script src="./js/main.js"></script>
+    </body>
+</html>
