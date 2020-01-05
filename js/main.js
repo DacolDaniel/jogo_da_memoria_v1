@@ -34,7 +34,7 @@ app = new Vue({
                 {nome: "Thor", imagem: `${PATH_IMG}thor.jpeg`, encontrado: false, mostrar: true}
             ],
             cards: [],
-            option: '',
+            option: 'menu',
             menuGameShow: false,
             contagemShow: false,
             contagemValue: 1,
@@ -42,11 +42,13 @@ app = new Vue({
             contarTempoInterval: null,
             resultado:{erro:0,tempo:'00:00:00'},
             temporizador:null,
-            records:[]
+            records:[],
+            som: new Audio('./audio/Hypnotic-Puzzle4.mp3'),
+            somErro: new Audio('./audio/UI_Quirky25.mp3'),
+            somAcerto:new Audio('./audio/Coins14.mp3'),
+            volume:50,
+            mostrarVolume:false
         }
-    },
-    mounted: function () {
-        this.menuOption("menu");
     },
     methods: {
         start: function () {
@@ -82,6 +84,9 @@ app = new Vue({
             return Math.floor(Math.random() * max)
         },
         mostrarCard: function (index) {
+            if(this.cards[index].encontrado || this.cards[index].mostrar ){
+                return;
+            }
             this.cards[index].mostrar = true;
             let cardsAbertos = this.procurarCardAberto();
             if (cardsAbertos.length == 2) {
@@ -92,14 +97,14 @@ app = new Vue({
                 }, 1000);
 
                 if (cardsAbertos[0].nome == cardsAbertos[1].nome) {
-                    new Audio('./audio/Coins14.mp3').play();
+                    this.somAcerto.play();
                     cardsAbertos[0].encontrado = true;
                     cardsAbertos[1].encontrado = true;
                     return;
                 }
 
                 this.resultado.erro++;
-                new Audio('./audio/UI_Quirky25.mp3').play();
+                this.somErro.play();
 
             }
         },
@@ -120,6 +125,12 @@ app = new Vue({
             clearInterval(this.temporizador);
             this.records = localStorage.getItem('records') ? JSON.parse(localStorage.getItem('records')) : [];
             this.menuGameShow = false;
+            console.log(this.som.readyState);
+            if(typeof this.som == "object"){
+                this.som.volume = this.volume/100;
+                this.som.loop=true;
+                this.som.play();
+            }
             switch (this.option) {
                 case "game":
                     this.tempoObj.hora = 0;
@@ -149,13 +160,15 @@ app = new Vue({
                      });
                     break;
                 default:
-                    new Audio('./audio/Robot-Footstep_4.mp3').play();
                     this.option = "menu";
                     break;
             }
         },
         toogleMenuGame: function () {
             this.menuGameShow = !this.menuGameShow;
+        },
+        toogleVolume: function () {
+            this.mostrarVolume = !this.mostrarVolume;
         },
         iniciarContagem: function () {
             this.contagemShow = true;
@@ -209,6 +222,8 @@ app = new Vue({
 
 
     },
-
-}
-})
+        modificarVolume:function(){
+            this.som.volume = this.volume/100;
+        }
+    }
+});
