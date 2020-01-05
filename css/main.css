@@ -3,8 +3,6 @@ body{
     padding: 0;
     background: #fff;
     background-image: url('../imagem/background-menu.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 #app{
