@@ -85,17 +85,5 @@
         </div>
         <script src="./js/vue.js"></script> 
         <script src="./js/main.js"></script>
-        <script>
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('./js/sw.js')
-                    .then(function () {
-                        console.log('service worker registered');
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        console.warn('service worker failed');
-                    });
-            }
-        </script>
     </body>
 </html>
