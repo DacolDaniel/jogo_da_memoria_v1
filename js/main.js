@@ -20,18 +20,17 @@ app = new Vue({
     el: "#app",
     data: function () {
         return {
-            cardOculto: PATH_IMG + 'cardoculto.jpeg',
+            cardOculto: PATH_IMG + 'interrogacao.png',
             cardsGame: [
-                {nome: "Homem Aranha", imagem: `${PATH_IMG}homem_aranha.jpg`, encontrado: false, mostrar: true},
-                {nome: "Hulk", imagem: `${PATH_IMG}hulk.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Super Homem", imagem: `${PATH_IMG}superman.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Homem de Ferro", imagem: `${PATH_IMG}iron_man.jpg`, encontrado: false, mostrar: true},
-                {nome: "Batman", imagem: `${PATH_IMG}batman.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Capitão America", imagem: `${PATH_IMG}capitao_america.jpg`, encontrado: false, mostrar: true},
-                {nome: "Mulher Maravilha", imagem: `${PATH_IMG}mulher_maravilha.png`, encontrado: false, mostrar: true},
-                {nome: "Flash", imagem: `${PATH_IMG}flash.jpg`, encontrado: false, mostrar: true},
-                {nome: "Dr. Estranho", imagem: `${PATH_IMG}dr_estranho.jpg`, encontrado: false, mostrar: true},
-                {nome: "Thor", imagem: `${PATH_IMG}thor.jpeg`, encontrado: false, mostrar: true}
+                {nome: "Daniel", imagem: `${PATH_IMG}daniel.jpeg`, encontrado: false, mostrar: true},
+                {nome: "Nádia", imagem: `${PATH_IMG}nadia.jpeg`, encontrado: false, mostrar: true},
+                {nome: "Theo", imagem: `${PATH_IMG}theo.jpeg`, encontrado: false, mostrar: true},
+                {nome: "Zaion", imagem: `${PATH_IMG}zaion.jpeg`, encontrado: false, mostrar: true},
+                {nome: "Luisa", imagem: `${PATH_IMG}luisa.jpeg`, encontrado: false, mostrar: true},
+                {nome: "Jurandir", imagem: `${PATH_IMG}jurandir.jpeg`, encontrado: false, mostrar: true},
+                {nome: "Familia", imagem: `${PATH_IMG}familia.jpeg`, encontrado: false, mostrar: true},
+                {nome: "z.theo", imagem: `${PATH_IMG}z_theo.jpeg`, encontrado: false, mostrar: true},
+                {nome: "Rosana", imagem: `${PATH_IMG}rosana.jpeg`, encontrado: false, mostrar: true}                
             ],
             cards: [],
             option: 'menu',

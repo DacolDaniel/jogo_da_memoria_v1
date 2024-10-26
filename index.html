@@ -29,7 +29,7 @@
                  v-for="(card,key) of cards" 
                  :index="key"
                  :key="key"
-                 :nome="!card.mostrar && !card.encontrado ? 'Encontre o Herói!' : card.nome"
+                 :nome="!card.mostrar && !card.encontrado ? 'Encontre!' : card.nome"
                  :imagem="!card.mostrar && !card.encontrado ? cardOculto  : card.imagem"
                  @acao="mostrarCard(key)"
             ></card>
