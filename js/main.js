@@ -18,19 +18,28 @@ Vue.component('card', {
 
 app = new Vue({
     el: "#app",
-    data: function () {
+    data: function () {        
         return {
             cardOculto: PATH_IMG + 'interrogacao.png',
             cardsGame: [
-                {nome: "Daniel", imagem: `${PATH_IMG}daniel.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Nádia", imagem: `${PATH_IMG}nadia.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Theo", imagem: `${PATH_IMG}theo.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Zaion", imagem: `${PATH_IMG}zaion.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Luisa", imagem: `${PATH_IMG}luisa.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Jurandir", imagem: `${PATH_IMG}jurandir.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Familia", imagem: `${PATH_IMG}familia.jpeg`, encontrado: false, mostrar: true},
-                {nome: "z.theo", imagem: `${PATH_IMG}z_theo.jpeg`, encontrado: false, mostrar: true},
-                {nome: "Rosana", imagem: `${PATH_IMG}rosana.jpeg`, encontrado: false, mostrar: true}                
+                {nome: "Igor, Hugo, Cláudia e Carlos", imagem: `${PATH_IMG}carlos.jpg`, encontrado: false, mostrar: true},
+                {nome: "Célia e Joaquim", imagem: `${PATH_IMG}celia1.jpg`, encontrado: false, mostrar: true},                
+                {nome: "Iraci, Célia e Théo", imagem: `${PATH_IMG}iraci_theo.jpg`, encontrado: false, mostrar: true},
+                {nome: "Iraci", imagem: `${PATH_IMG}iraci.jpg`, encontrado: false, mostrar: true},
+                {nome: "Luciano, Célia, Iraci, Neuza, Jurandir, Moacir", imagem: `${PATH_IMG}irmaos1.jpg`, encontrado: false, mostrar: true},                
+                {nome: "Iraci, Orácio, Célia, Luciano", imagem: `${PATH_IMG}irmaos2.jpg`, encontrado: false, mostrar: true},   
+                {nome: "Luciana e Manuela", imagem: `${PATH_IMG}luciana.jpg`, encontrado: false, mostrar: true},                
+                {nome: "Marcilio Dacol", imagem: `${PATH_IMG}marcilio.jpg`, encontrado: false, mostrar: true},
+                {nome: "Luciano, Daniel e Luisa", imagem: `${PATH_IMG}luciano_luisa.jpg`, encontrado: false, mostrar: true},
+                {nome: "Marcilio Dacol", imagem: `${PATH_IMG}marcilio2.jpg`, encontrado: false, mostrar: true},                               
+                {nome: "Aline e Neuza", imagem: `${PATH_IMG}neuza.jpg`, encontrado: false, mostrar: true},
+                {nome: "Luciano e Orácio", imagem: `${PATH_IMG}oracio.jpg`, encontrado: false, mostrar: true},
+                {nome: "Jurandir e Luisa", imagem: `${PATH_IMG}pai_luisa.jpg`, encontrado: false, mostrar: true}, 
+                {nome: "Sandra, Toninho", imagem: `${PATH_IMG}sandra.jpg`, encontrado: false, mostrar: true}, 
+                {nome: "Tereza Dacol", imagem: `${PATH_IMG}tereza.jpg`, encontrado: false, mostrar: true}, 
+                {nome: "Daniel, Moacir e Nádia", imagem: `${PATH_IMG}tioci.jpg`, encontrado: false, mostrar: true},    
+                {nome: "Neide e Théo", imagem: `${PATH_IMG}neide_theo.jpg`, encontrado: false, mostrar: true}, 
+                {nome: "Neide, Moacir e Neuza", imagem: `${PATH_IMG}neide1.jpg`, encontrado: false, mostrar: true},                             
             ],
             cards: [],
             option: 'menu',
@@ -51,26 +60,23 @@ app = new Vue({
     },
     methods: {
         start: function () {
-            this.cards = [];
-            this.embaralharCards();
-            this.iniciarContagem();
-            setTimeout(this.esconderCards, 3000);
+            console.log("Método start chamado");
+            this.cards = []; // Reinicia o array de cards
+            this.embaralharCards(); // Chama o método para embaralhar os cards
+            this.iniciarContagem(); // Inicia a contagem
+            setTimeout(this.esconderCards, 3000); // Esconde os cards após 3 segundos
         },
         embaralharCards: function () {
-            if (this.cards.length == (this.cardsGame.length * 2)) {
-                return;
-            }
-
-            let index = this.getRandom(this.cardsGame.length);
-            let count = this.contarCardGamenosCards(this.cardsGame[index]);
-            if (count < 2) {
-                this.cards.push(Object.assign({}, this.cardsGame[index]));
-            }
-
-            this.embaralharCards();
-
-
-        },
+            // Adiciona duas instâncias de cada card ao array
+            this.cardsGame.forEach(card => {
+                this.cards.push(Object.assign({}, card)); // Adiciona a primeira instância
+                this.cards.push(Object.assign({}, card)); // Adiciona a segunda instância
+            });
+    
+            // Embaralha o array de cards
+            this.cards = this.cards.sort(() => Math.random() - 0.5);
+        },  
+        
         contarCardGamenosCards: function (card) {
 
             let cards = this.cards.filter(value => {
